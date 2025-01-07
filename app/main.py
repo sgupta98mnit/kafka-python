@@ -14,8 +14,8 @@ def main():
 
     print(f"Client connected: {_}")
 
-    message_size = struct.pack(">i", 0);
-    correlation_id = struct.pack(">i", 7);
+    message_size = struct.pack(">i", 0)
+    correlation_id = struct.pack(">i", 7)
 
     client_socket.sendall(message_size + correlation_id)
 
