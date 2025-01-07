@@ -19,8 +19,6 @@ def main():
 
     client_socket.sendall(message_size + correlation_id)
 
-    client_socket.close()
-
 
 
 if __name__ == "__main__":
