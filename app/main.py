@@ -12,13 +12,18 @@ def main():
     server = socket.create_server(("localhost", 9092), reuse_port=True)
     client_socket, _ = server.accept() # wait for client
 
+    req_data = client_socket.recv(1024)
+
+    req_correlation_id = struct.unpack(">i", req_data[8:12])[0]
+
     print(f"Client connected: {_}")
 
     message_size = struct.pack(">i", 0)
-    correlation_id = struct.pack(">i", 7)
+    res_correlation_id = struct.pack(">i", req_correlation_id)
 
-    client_socket.sendall(message_size + correlation_id)
+    client_socket.sendall(message_size + res_correlation_id)
 
+    client_socket.close()
 
 
 if __name__ == "__main__":
